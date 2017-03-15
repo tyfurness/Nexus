@@ -21,7 +21,7 @@ public class Test : MonoBehaviour
     private void OnButtonClicked()
     {
         // NexusManager.Instance.ShowAd();
-        NexusManager.Instance.BuyProduct("100_coins");
+        NexusManager.Instance.BuyProductID("100_coins");
     }
 
     private void OnAdsComplete(ShowResult result)

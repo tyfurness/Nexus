@@ -33,7 +33,7 @@ public class NexusManager : MonoBehaviour, IStoreListener
 
     private Dictionary<string, ProductType> IAPProductInfo;
 
-    private static bool isDestroying = false;
+    private static bool _isDestroying = false;
 
     #endregion
 
@@ -46,7 +46,7 @@ public class NexusManager : MonoBehaviour, IStoreListener
         get
         {
             _instance = (NexusManager)FindObjectOfType(typeof(NexusManager));
-            if (_instance == null && !isDestroying)
+            if (_instance == null && !_isDestroying)
             {
                 _instance = (new GameObject("NexusManager")).AddComponent<NexusManager>();
             }
@@ -56,7 +56,7 @@ public class NexusManager : MonoBehaviour, IStoreListener
     
     private void OnDestroy()
     {
-        isDestroying = true;
+        _isDestroying = true;
     }
 
     private void Start()
@@ -224,18 +224,9 @@ public class NexusManager : MonoBehaviour, IStoreListener
     }
 
     /// <summary>
-    /// Store purchase, will give a callback if it succeeds/fails
-    /// </summary>
-    /// <param name="productID">Product of the wanted purchase. I.e 100_coins</param>
-    public void BuyProduct(string productID)
-    {
-        BuyProductID(productID);
-    }
-
-    /// <summary>
     /// Internal buy product that will call the store controller to begin the purchase process
     /// </summary>
-    private void BuyProductID(string productID)
+    public void BuyProductID(string productID)
     {
         if (IsInitialized())
         {
