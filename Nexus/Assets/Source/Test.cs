@@ -14,11 +14,14 @@ public class Test : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
         NexusManager.AdsComplete += OnAdsComplete;
         NexusManager.NoAdsAvailable += OnNoAdsAvailable;
+        NexusManager.Instance.AddProductToDictionary("100_coins", UnityEngine.Purchasing.ProductType.Consumable);
+        NexusManager.Instance.InitializePurchasing();
     }
 
     private void OnButtonClicked()
     {
-        NexusManager.Instance.ShowAd();
+        // NexusManager.Instance.ShowAd();
+        NexusManager.Instance.BuyProduct("100_coins");
     }
 
     private void OnAdsComplete(ShowResult result)
