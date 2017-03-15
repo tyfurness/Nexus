@@ -45,12 +45,17 @@ public class NexusManager : MonoBehaviour
     /// <param name="data">Any data passed in. i.e - MenuButton, PlayButton</param>
     public void TrackEvent(string eventName, Dictionary<string, object> data)
     {
+        // Just in case the data that was passed in was null
         if(data == null || data.Count < 1)
         {
+            Logger.Log("Data passed in was or empty.", LOGGING_STRING, LOGGING_COLOR);
             return;
         }
+
+        // Set the result so we can log the output
         AnalyticsResult result = Analytics.CustomEvent(eventName, data);
 
+        #region Analytic Logging
         switch(result)
         {
             case AnalyticsResult.Ok:
@@ -79,16 +84,25 @@ public class NexusManager : MonoBehaviour
                 break;
 
             default:
-                Logger.Log("Uknown error.", LOGGING_STRING, LOGGING_COLOR);
+                Logger.Log("Unknown error.", LOGGING_STRING, LOGGING_COLOR);
                 break;
         }
+
+        #endregion
     }
 
+    /// <summary>
+    /// Shows an ad if one is available. 
+    /// </summary>
+    /// <remarks>
+    /// If ad is available it will show an add and then call OnAdsComplete with the result (finished, skipped, etc)
+    /// If no ads are available, it will call NoAdsAvailable
+    /// </remarks>
     public void ShowAd()
     {
-        
         if(Advertisement.IsReady())
         {
+            // Set the callback so we can call on complete
             ShowOptions showOptions = new ShowOptions();
             showOptions.resultCallback = OnAdComplete;
             Advertisement.Show(showOptions);
@@ -102,6 +116,10 @@ public class NexusManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Ad was shown and completed in some sense
+    /// </summary>
+    /// <param name="result">Failed, Skipped, Finished</param>
     public void OnAdComplete(ShowResult result)
     {
         if(AdsComplete != null)
