@@ -2,26 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
     [SerializeField]
-    private Button button;
+    private Button button = null;
+    [SerializeField]
+    private Text textField = null;
+
     // Use this for initialization
     void Start()
     {
         button.onClick.AddListener(OnButtonClicked);
-        NexusManager.AdsComplete += OnAdsComplete;
-        NexusManager.NoAdsAvailable += OnNoAdsAvailable;
-        NexusManager.Instance.AddProductToDictionary("100_coins", UnityEngine.Purchasing.ProductType.Consumable);
-        NexusManager.Instance.InitializePurchasing();
+        NexusManager.Instance.ADManager.AdsComplete += OnAdsComplete;
+        NexusManager.Instance.ADManager.NoAdsAvailable += OnNoAdsAvailable;
+        Dictionary<string, ProductType> productDict = new Dictionary<string, ProductType>();
+        productDict.Add("100_coins", UnityEngine.Purchasing.ProductType.Consumable);
+        NexusManager.Instance.IAPManager.Initialize(productDict);
+        NexusManager.Instance.IAPManager.ProductPurchased += OnProductPurchased;
+        NexusManager.Instance.IAPManager.ProductFailedToPurchase += OnFailedToPurchase;
+    }
+
+    private void OnProductPurchased(string productID)
+    {
+        textField.text = productID + " was successfully purchased.";
+    }
+
+    private void OnFailedToPurchase(string productID, string error)
+    {
+        if(!string.IsNullOrEmpty(error))
+        {
+            textField.text = productID + " failed to purchase: " + error;
+        }
+        else
+        {
+            textField.text = productID + " failed to purchase, product doesn't exist.";
+        }
     }
 
     private void OnButtonClicked()
     {
-        // NexusManager.Instance.ShowAd();
-        NexusManager.Instance.BuyProductID("100_coins");
+        //NexusManager.Instance.ADManager.ShowAd();
+        NexusManager.Instance.IAPManager.BuyProductID("100_coins");
     }
 
     private void OnAdsComplete(ShowResult result)
