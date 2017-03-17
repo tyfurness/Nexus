@@ -11,7 +11,7 @@ using UnityEngine.Purchasing;
 /// <remarks>
 /// Author Tyler Furness, March 2017
 /// </remarks>
-public class NexusManager : MonoBehaviour
+public class Nexus : MonoBehaviour
 {
     #region Variables
     
@@ -31,15 +31,15 @@ public class NexusManager : MonoBehaviour
     /// <summary>
     /// Make sure we have a single instance of this class, if one wasn't created ahead of time then make one and return the instance
     /// </summary>
-    private static NexusManager _instance = null;
-    public static NexusManager Instance
+    private static Nexus _instance = null;
+    public static Nexus Instance
     {
         get
         {
-            _instance = (NexusManager)FindObjectOfType(typeof(NexusManager));
+            _instance = (Nexus)FindObjectOfType(typeof(Nexus));
             if (_instance == null && !_isDestroying)
             {
-                _instance = (new GameObject("NexusManager")).AddComponent<NexusManager>();
+                _instance = (new GameObject("NexusManager")).AddComponent<Nexus>();
             }
             return _instance;
         }

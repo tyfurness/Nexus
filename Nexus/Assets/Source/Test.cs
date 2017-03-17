@@ -16,13 +16,13 @@ public class Test : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener(OnButtonClicked);
-        NexusManager.Instance.ADManager.AdsComplete += OnAdsComplete;
-        NexusManager.Instance.ADManager.NoAdsAvailable += OnNoAdsAvailable;
+        Nexus.Instance.ADManager.AdsComplete += OnAdsComplete;
+        Nexus.Instance.ADManager.NoAdsAvailable += OnNoAdsAvailable;
         Dictionary<string, ProductType> productDict = new Dictionary<string, ProductType>();
         productDict.Add("100_coins", UnityEngine.Purchasing.ProductType.Consumable);
-        NexusManager.Instance.IAPManager.Initialize(productDict);
-        NexusManager.Instance.IAPManager.ProductPurchased += OnProductPurchased;
-        NexusManager.Instance.IAPManager.ProductFailedToPurchase += OnFailedToPurchase;
+        Nexus.Instance.IAPManager.Initialize(productDict);
+        Nexus.Instance.IAPManager.ProductPurchased += OnProductPurchased;
+        Nexus.Instance.IAPManager.ProductFailedToPurchase += OnFailedToPurchase;
     }
 
     private void OnProductPurchased(string productID)
@@ -44,8 +44,8 @@ public class Test : MonoBehaviour
 
     private void OnButtonClicked()
     {
-        //NexusManager.Instance.ADManager.ShowAd();
-        NexusManager.Instance.IAPManager.BuyProductID("100_coins");
+        //Nexus.Instance.ADManager.ShowAd();
+        Nexus.Instance.IAPManager.BuyProductID("100_coins");
     }
 
     private void OnAdsComplete(ShowResult result)
