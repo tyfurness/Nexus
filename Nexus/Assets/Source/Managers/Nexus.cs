@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Advertisements;
-using UnityEngine.Analytics;
-using UnityEngine.Purchasing;
+﻿using UnityEngine;
 
 /// <summary>
 /// Manager that holds references to the different managers
