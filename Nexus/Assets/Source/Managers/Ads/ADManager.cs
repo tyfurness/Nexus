@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Advertisements;
 
 /// <summary>
@@ -26,7 +23,7 @@ public class ADManager
     /// </remarks>
     public void ShowAd()
     {
-        if (Advertisement.IsReady())
+        if (IsAdAvailable())
         {
             // Set the callback so we can call on complete
             ShowOptions showOptions = new ShowOptions();
@@ -54,5 +51,13 @@ public class ADManager
         {
             AdsComplete(result);
         }
+    }
+
+    /// <summary>
+    /// Determines if an ad is available or not.
+    /// </summary>
+    public bool IsAdAvailable()
+    {
+        return Advertisement.IsReady();
     }
 }
