@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
+using NexusManager;
 
 public class Test : MonoBehaviour
 {

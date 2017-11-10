@@ -13,6 +13,42 @@ public class AnalyticManager
 {
     private const string ANALYTICS_LOGGING_COLOR = "cc4";
 
+    private List<AnalyticsProvider> _analyticsProviders = null;
+
+    public List<AnalyticsProvider> AnalyticsProviders {  get { return _analyticsProviders; } }
+
+    public void Initialize(List<AnalyticsProvider> providers)
+    {
+        _analyticsProviders = providers;
+    }
+
+    public void LogMetric(string key)
+    {
+        for (int i = 0; i < _analyticsProviders.Count; i++)
+        {
+            Logger.Log("Firing off an Analytics Event from: " + _analyticsProviders[i].ToString(), Logger.LogClasses.Analytics.ToString(), ANALYTICS_LOGGING_COLOR);
+            _analyticsProviders[i].LogMetric(key);
+        }
+    }
+
+    public void LogMetric(string key, string param)
+    {
+        for (int i = 0; i < _analyticsProviders.Count; i++)
+        {
+            Logger.Log("Firing off an Analytics Event from: " + _analyticsProviders[i].ToString(), Logger.LogClasses.Analytics.ToString(), ANALYTICS_LOGGING_COLOR);
+            _analyticsProviders[i].LogMetric(key, param);
+        }
+    }
+
+    public void LogMetric(string key, Dictionary<string, string> dict)
+    {
+        for (int i = 0; i < _analyticsProviders.Count; i++)
+        {
+            Logger.Log("Firing off an Analytics Event from: " + _analyticsProviders[i].ToString(), Logger.LogClasses.Analytics.ToString(), ANALYTICS_LOGGING_COLOR);
+            _analyticsProviders[i].LogMetric(key, dict);
+        }
+    }
+
     /// <summary>
     /// Analytic - Fire an event to track various data through Unity's Ad system and log the result
     /// </summary>
