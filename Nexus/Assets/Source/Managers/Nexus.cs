@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.Analytics;
-using UnityEngine.Purchasing;
 
 namespace NexusManager
 {
@@ -19,8 +18,8 @@ namespace NexusManager
 
         private static bool _isDestroying = false;
 
-        private IAPManager _iapManager;
-        public IAPManager IAPManager { get { return _iapManager; } }
+        // private IAPManager _iapManager;
+        //public IAPManager IAPManager { get { return _iapManager; } }
 
         private ADManager _adManager;
         public ADManager ADManager { get { return _adManager; } }
@@ -52,7 +51,7 @@ namespace NexusManager
 
         private void Awake()
         {
-            _iapManager = new IAPManager();
+           // _iapManager = new IAPManager();
             _adManager = new ADManager();
             _analyticManager = new AnalyticManager();
             _analyticManager.Initialize(_analyticsProviders);

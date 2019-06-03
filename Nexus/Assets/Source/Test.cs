@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
-using UnityEngine.Purchasing;
+//using UnityEngine.Purchasing;
 using UnityEngine.UI;
 using NexusManager;
 
@@ -18,11 +18,11 @@ public class Test : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
         Nexus.Instance.ADManager.AdsComplete += OnAdsComplete;
         Nexus.Instance.ADManager.NoAdsAvailable += OnNoAdsAvailable;
-        Dictionary<string, ProductType> productDict = new Dictionary<string, ProductType>();
-        productDict.Add("100_coins", UnityEngine.Purchasing.ProductType.Consumable);
-        Nexus.Instance.IAPManager.Initialize(productDict);
-        Nexus.Instance.IAPManager.ProductPurchased += OnProductPurchased;
-        Nexus.Instance.IAPManager.ProductFailedToPurchase += OnFailedToPurchase;
+        // Dictionary<string, ProductType> productDict = new Dictionary<string, ProductType>();
+        //productDict.Add("100_coins", UnityEngine.Purchasing.ProductType.Consumable);
+        // Nexus.Instance.IAPManager.Initialize(productDict);
+        //  Nexus.Instance.IAPManager.ProductPurchased += OnProductPurchased;
+        //  Nexus.Instance.IAPManager.ProductFailedToPurchase += OnFailedToPurchase;
     }
 
     private void OnProductPurchased(string productID)
@@ -44,8 +44,8 @@ public class Test : MonoBehaviour
 
     private void OnButtonClicked()
     {
-        //Nexus.Instance.ADManager.ShowAd();
-        Nexus.Instance.IAPManager.BuyProductID("100_coins");
+        Nexus.Instance.ADManager.ShowAd();
+       // Nexus.Instance.IAPManager.BuyProductID("100_coins");
     }
 
     private void OnAdsComplete(ShowResult result)
